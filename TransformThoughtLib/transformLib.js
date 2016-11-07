@@ -1,14 +1,16 @@
 (function(){
   var boxen = document.querySelectorAll(".box")
   var closestBox = boxen[0]
-  window.addEventListener("scroll", function(){
+  window.addEventListener("touchend", function(){
+    var curScroll = document.body.scrollTop
     boxen.forEach(function(box){
-      var curScroll = document.body.scrollTop
-      if(box.offsetTop - curScroll < closestBox.offsetTop - curScroll) {
+      box.classList.remove("full")
+      if(Math.abs(box.offsetTop - curScroll) < Math.abs(closestBox.offsetTop - curScroll)) {
         closestBox = box
       }
     })
 
+    closestBox.classList.add("full")
     document.body.scrollTop = closestBox.offsetTop
   })
 })()
