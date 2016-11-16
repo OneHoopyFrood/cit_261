@@ -60,7 +60,48 @@
     }
     50% {
       transform: scale(1, .6);
-      transform-origin: bottom left;
+      transform-origin: bottom;
+      animation-timing-function: linear; /* Leave empty/give invalid value */
+    }
+    53% {
+      bottom: 0;
+      transform: scale(1, 1);
+      animation-timing-function: ease-out;
+    }
+  }
+
+  /* Nasty animation */
+  .ball2 {
+    content: '';
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: tomato;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    /* Animation */
+    animation-name: bounceN;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  @keyframes bounceN {
+    from, to  {
+      bottom: 60%;
+      animation-timing-function: asdfdaf; /*invalid*/
+    }
+    45% {
+      transform: scale(1, 1);
+      bottom: 0;
+      animation-timing-function: ; /*empty*/
+    }
+    50% {
+      transform: scale(1, .6);
+      transform-origin: bottom;
       animation-timing-function: linear;
     }
     53% {
@@ -90,24 +131,32 @@
   .wheelie {
     /* Animation */
     animation-name: wheelie;
-    animation-duration: 4s;
+    animation-duration: 4s; /* What if the animation duratino is neg? - breaks it*/
     animation-timing-function: cubic-bezier(.3,.5,.2,1); /* default */
     /* animation-fill-mode: forwards; */
 
     transform-origin: left;
   }
   @keyframes wheelie {
+    to { top: 600px; } /* Try different orders */
     from { left: 0px; }
     25% { transform: rotate(-30deg); background-color: tomato; }
     40% { transform: rotate(0deg); animation-timing-function: ease-out; background-color: #455ba6; }
-    to { left: 600px; }
   }
+  /* From and to only? */
+  /* Change to "left" to "top" */
   </style>
 </head>
 <body>
   <div class="stage">
     <div class="traveler">
       <div class="ball"></div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="traveler">
+      <div class="ball2"></div>
     </div>
   </div>
 

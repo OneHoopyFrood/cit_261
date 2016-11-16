@@ -1,42 +1,29 @@
 /************************************
-
-    Sandbox: Drawing Canvas
-
-************************************/
-
-function on_load()
-{
-    setupMyCanvas();
-}
+ *
+ ***********************************/
+window.addEventListener("load", function(){
+  setupCanvas()
+})
 
 // Happy path (touch events)
-function setupMyCanvas()
+function setupCanvas()
 {
     var myCanvas = document.getElementById("myCanvas");
-    myCanvas.style.backgroundColor = "yellow";
-    myCanvas.style.width = "100%";
-    myCanvas.style.height = "100%";
-    myCanvas.style.backgroundColor = "yellow";
 
-    var lastCoordinates = { x: "0", y: "0" };
-    var context = myCanvas.getContext("2d");
-    context.canvas.width = window.innerWidth;
-    context.canvas.height = window.innerHeight;
+    var lastCoordinates = { x: 0, y: 0 };
+    var context = myCanvas.getContext("2d"); // Try other strings
 
     // ontouchstart
-    myCanvas.ontouchstart = function(event)
-    {
-        // Log where you finger first touch so you can draw from there to where you move it to later (if you move it).
+    myCanvas.addEventListener("touchstart", function(event) {
         lastCoordinates.x = event.touches[0].pageX
         lastCoordinates.y = event.touches[0].pageY
-    }
+    })
 
     // ontouchmove
-    myCanvas.ontouchmove = function (event)
-    {
+    myCanvas.addEventListener("touchmove", function (event) {
         // prevent scrolling with finger touches
         event.preventDefault();
-        
+
         // Log where you moved your finger to (x, y)
         var x = event.touches[0].pageX
         var y = event.touches[0].pageY
@@ -53,5 +40,5 @@ function setupMyCanvas()
 
         // Return false (only used by MS Internet Explorer
         return false;
-    }
+    })
 }
